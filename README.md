@@ -1,5 +1,7 @@
 # SJ Ping Station Demo
 
+![](FPingDemo.png)
+
 There is a diagram that demonstrates the processing workflow of demo
 that is responsible for collecting of aggregated information on accessibility of nodes.
 Green, yellow and purple blocks are executed with SJ-Platform
