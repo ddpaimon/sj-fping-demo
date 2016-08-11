@@ -5,14 +5,15 @@
 There is a diagram that demonstrates the processing workflow of demo
 that is responsible for collecting of aggregated information on accessibility of nodes.
 Green, yellow and purple blocks are executed with SJ-Platform
-and it is ps-input module, ps-process module and ps-output module respectively.
+and it is ps-input module, ps-process module and ps-output module, respectively.
 As you can see, the data come in input module through pipeline of fping and netcat.
 Then the input module parses ICMP echo responses (select IP and response time)
 and ICMP unreachable responses (select only IP)
-and puts parsed data into 'echo-response' stream and 'unreachable-response' stream respectively.
+and puts parsed data into 'echo-response' stream and 'unreachable-response' stream, respectively.
 After that the process module aggregates response time and total amount of echo/unreachable responses by IP by 1 minute
 and sends aggregated data to 'echo-response-1m' stream.
-And finally the output module just displace aggregated data from 'echo-response-1m' to Elasticsearch.
+Finally the output module just displace aggregated data from 'echo-response-1m' to Elasticsearch.  
+Also you can launch more than one ps-process modules and ps-output modules, respectively (ref. Customization)
 
 ## Table of contents
 
@@ -118,12 +119,16 @@ If you want to change an aggregation interval you can follow these steps:
 - Create two additional streams like 'echo-response-1m' and 'es-echo-response-1m'
 (e.g. ['echo-response-3m'](api-json/streams/echo-response-3m.json) and
 ['es-echo-response-3m'](api-json/streams/es-echo-response-3m.json))
-- Create an instance of process module only changing the 'checkpoint-interval' at the corresponding time (in milliseconds)
+- Create an instance (with different name) of process module only changing the 'checkpoint-interval' at the corresponding time (in milliseconds)
+- Create an instance (with different name) of output module only changing the 'input' at 'echo-response-3m' and the 'output' at 'es-echo-response-3m'
 
-After that, you can launch this instance as described above in the second point of launching section
-(don't forget to change the instance name: 'pingstation-process' in the request line
+After that, you can launch this two instances as described above in the launching section
+(don't forget to change the instance name: 'pingstation-process' and 'pingstation-output' in the request line
 ```bash
 $ curl --request GET "http://host:port/v1/modules/regular-streaming/pingstation-process/0.1/instance/<new instance name>/start"
+```
+```bash
+$ curl --request GET "http://host:port/v1/modules/output-streaming/pingstation-output/0.1/instance/<new instance name>/start"
 ```
 ).
 
