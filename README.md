@@ -32,9 +32,10 @@ You should follow these steps to build and upload the all of modules of ping sta
 $ git clone https://github.com/bwsw/sj-fping-demo.git
 $ cd sj-fping-demo
 $ sbt assembly
-$ curl --form jar=@ps-input/target/scala-2.11/ps-input-1.0.jar http://host:port/v1/modules
-$ curl --form jar=@ps-process/target/scala-2.11/ps-process-1.0.jar http://host:port/v1/modules
-$ curl --form jar=@ps-output/target/scala-2.11/ps-output-1.0.jar http://host:port/v1/modules
+$ address=<host>:<port>
+$ curl --form jar=@ps-input/target/scala-2.11/ps-input-1.0.jar http://$address/v1/modules
+$ curl --form jar=@ps-process/target/scala-2.11/ps-process-1.0.jar http://$address/v1/modules
+$ curl --form jar=@ps-output/target/scala-2.11/ps-output-1.0.jar http://$address/v1/modules
 ```
 
 ## Preparation
@@ -43,35 +44,35 @@ After loading the modules you should create streams that will be used in the ins
 
 - To create an output stream of input module (consequently, an input stream of process module) that will be used for keeping an IP and average time from ICMP echo response and also timestamp of the event
 ```bash
-$ curl --request POST "http://host:port/v1/streams" -H 'Content-Type: application/json' --data "@api-json/streams/echo-response.json"
+$ curl --request POST "http://$address/v1/streams" -H 'Content-Type: application/json' --data "@api-json/streams/echo-response.json"
 ```
 - To create another output stream of input module (consequently, an input stream of process module) that will be used for keeping an IP from ICMP unreachable response and also timestamp of the event
 ```bash
-$ curl --request POST "http://host:port/v1/streams" -H 'Content-Type: application/json' --data "@api-json/streams/unreachable-response.json"
+$ curl --request POST "http://$address/v1/streams" -H 'Content-Type: application/json' --data "@api-json/streams/unreachable-response.json"
 ```
 - To create an output stream of process module (consequently, an input stream of output module) that will be used for keeping an aggregated information for each IP (by minute)
 about average time of echo response, total amount of echo responses, total amount of unreachable responses and the timestamp
 ```bash
-$ curl --request POST "http://host:port/v1/streams" -H 'Content-Type: application/json' --data "@api-json/streams/echo-response-1m.json"
+$ curl --request POST "http://$address/v1/streams" -H 'Content-Type: application/json' --data "@api-json/streams/echo-response-1m.json"
 ```
 - To create an output stream of output module that will be used for keeping an aggregated information (by minute) from previous stream including total amount of responses
 ```bash
-$ curl --request POST "http://host:port/v1/streams" -H 'Content-Type: application/json' --data "@api-json/streams/es-echo-response-1m.json"
+$ curl --request POST "http://$address/v1/streams" -H 'Content-Type: application/json' --data "@api-json/streams/es-echo-response-1m.json"
 ```
 
 Then you should create an instance for each module:
 
 - For creating an instance of input module send the following post request:
 ```bash
-$ curl --request POST "http://host:port/v1/modules/input-streaming/pingstation-input/0.1/instance" -H 'Content-Type: application/json' --data "@api-json/instances/pingstation-input.json"
+$ curl --request POST "http://$address/v1/modules/input-streaming/pingstation-input/0.1/instance" -H 'Content-Type: application/json' --data "@api-json/instances/pingstation-input.json"
 ```
 - For creating an instance of process module send the following post request:
 ```bash
-$ curl --request POST "http://host:port/v1/modules/regular-streaming/pingstation-process/0.1/instance" -H 'Content-Type: application/json' --data "@api-json/instances/pingstation-process.json"
+$ curl --request POST "http://$address/v1/modules/regular-streaming/pingstation-process/0.1/instance" -H 'Content-Type: application/json' --data "@api-json/instances/pingstation-process.json"
 ```
 - For creating an instance of output module send the following post request:
 ```bash
-$ curl --request POST "http://host:port/v1/modules/output-streaming/pingstation-output/0.1/instance" -H 'Content-Type: application/json' --data "@api-json/instances/pingstation-output.json"
+$ curl --request POST "http://$address/v1/modules/output-streaming/pingstation-output/0.1/instance" -H 'Content-Type: application/json' --data "@api-json/instances/pingstation-output.json"
 ```
 
 ## Launching
@@ -80,20 +81,20 @@ After that you can launch the every module:
 
 - For launching the input module send:
 ```bash
-$ curl --request GET "http://host:port/v1/modules/input-streaming/pingstation-input/0.1/instance/pingstation-input/start"
+$ curl --request GET "http://$address/v1/modules/input-streaming/pingstation-input/0.1/instance/pingstation-input/start"
 ```
 - For launching the process module send:
 ```bash
-$ curl --request GET "http://host:port/v1/modules/regular-streaming/pingstation-process/0.1/instance/pingstation-process/start"
+$ curl --request GET "http://$address/v1/modules/regular-streaming/pingstation-process/0.1/instance/pingstation-process/start"
 ```
 - For launching the output module send:
 ```bash
-$ curl --request GET "http://host:port/v1/modules/output-streaming/pingstation-output/0.1/instance/pingstation-output/start"
+$ curl --request GET "http://$address/v1/modules/output-streaming/pingstation-output/0.1/instance/pingstation-output/start"
 ```
 
 To get a list of listening ports of input module:
 ```bash
-$ curl --request GET "http://host:port/v1/modules/input-streaming/pingstation-input/0.1/instance/pingstation-input"
+$ curl --request GET "http://$address/v1/modules/input-streaming/pingstation-input/0.1/instance/pingstation-input"
 ```
 and look at field named tasks, e.g. it will look like
 > "tasks": {   
@@ -125,10 +126,10 @@ If you want to change an aggregation interval you can follow these steps:
 After that, you can launch this two instances as described above in the launching section
 (don't forget to change the instance name: 'pingstation-process' and 'pingstation-output' in the request line
 ```bash
-$ curl --request GET "http://host:port/v1/modules/regular-streaming/pingstation-process/0.1/instance/<new instance name>/start"
+$ curl --request GET "http://$address/v1/modules/regular-streaming/pingstation-process/0.1/instance/<new instance name>/start"
 ```
 ```bash
-$ curl --request GET "http://host:port/v1/modules/output-streaming/pingstation-output/0.1/instance/<new instance name>/start"
+$ curl --request GET "http://$address/v1/modules/output-streaming/pingstation-output/0.1/instance/<new instance name>/start"
 ```
 ).
 
@@ -138,15 +139,15 @@ To stop the modules:
 
 - For stopping the input module send:
 ```bash
-$ curl --request GET "http://host:port/v1/modules/input-streaming/pingstation-input/0.1/instance/pingstation-input/stop"
+$ curl --request GET "http://$address/v1/modules/input-streaming/pingstation-input/0.1/instance/pingstation-input/stop"
 ```
 - For stopping the process module send:
 ```bash
-$ curl --request GET "http://host:port/v1/modules/regular-streaming/pingstation-process/0.1/instance/pingstation-process/stop"
+$ curl --request GET "http://$address/v1/modules/regular-streaming/pingstation-process/0.1/instance/pingstation-process/stop"
 ```
 - For stopping the output module send:
 ```bash
-$ curl --request GET "http://host:port/v1/modules/output-streaming/pingstation-output/0.1/instance/pingstation-output/start"
+$ curl --request GET "http://$address/v1/modules/output-streaming/pingstation-output/0.1/instance/pingstation-output/start"
 ```
 
 ## See the Results
