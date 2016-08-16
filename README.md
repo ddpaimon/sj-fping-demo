@@ -64,15 +64,15 @@ Then you should create an instance for each module:
 
 - For creating an instance of input module send the following post request:
 ```bash
-$ curl --request POST "http://$address/v1/modules/input-streaming/pingstation-input/0.1/instance" -H 'Content-Type: application/json' --data "@api-json/instances/pingstation-input.json"
+$ curl --request POST "http://$address/v1/modules/input-streaming/pingstation-input/1.0/instance" -H 'Content-Type: application/json' --data "@api-json/instances/pingstation-input.json"
 ```
 - For creating an instance of process module send the following post request:
 ```bash
-$ curl --request POST "http://$address/v1/modules/regular-streaming/pingstation-process/0.1/instance" -H 'Content-Type: application/json' --data "@api-json/instances/pingstation-process.json"
+$ curl --request POST "http://$address/v1/modules/regular-streaming/pingstation-process/1.0/instance" -H 'Content-Type: application/json' --data "@api-json/instances/pingstation-process.json"
 ```
 - For creating an instance of output module send the following post request:
 ```bash
-$ curl --request POST "http://$address/v1/modules/output-streaming/pingstation-output/0.1/instance" -H 'Content-Type: application/json' --data "@api-json/instances/pingstation-output.json"
+$ curl --request POST "http://$address/v1/modules/output-streaming/pingstation-output/1.0/instance" -H 'Content-Type: application/json' --data "@api-json/instances/pingstation-output.json"
 ```
 
 ## Launching
@@ -81,20 +81,20 @@ After that you can launch the every module:
 
 - For launching the input module send:
 ```bash
-$ curl --request GET "http://$address/v1/modules/input-streaming/pingstation-input/0.1/instance/pingstation-input/start"
+$ curl --request GET "http://$address/v1/modules/input-streaming/pingstation-input/1.0/instance/pingstation-input/start"
 ```
 - For launching the process module send:
 ```bash
-$ curl --request GET "http://$address/v1/modules/regular-streaming/pingstation-process/0.1/instance/pingstation-process/start"
+$ curl --request GET "http://$address/v1/modules/regular-streaming/pingstation-process/1.0/instance/pingstation-process/start"
 ```
 - For launching the output module send:
 ```bash
-$ curl --request GET "http://$address/v1/modules/output-streaming/pingstation-output/0.1/instance/pingstation-output/start"
+$ curl --request GET "http://$address/v1/modules/output-streaming/pingstation-output/1.0/instance/pingstation-output/start"
 ```
 
 To get a list of listening ports of input module:
 ```bash
-$ curl --request GET "http://$address/v1/modules/input-streaming/pingstation-input/0.1/instance/pingstation-input"
+$ curl --request GET "http://$address/v1/modules/input-streaming/pingstation-input/1.0/instance/pingstation-input"
 ```
 and look at field named tasks, e.g. it will look like
 > "tasks": {   
@@ -126,10 +126,10 @@ If you want to change an aggregation interval you can follow these steps:
 After that, you can launch this two instances as described above in the launching section
 (don't forget to change the instance name: 'pingstation-process' and 'pingstation-output' in the request line
 ```bash
-$ curl --request GET "http://$address/v1/modules/regular-streaming/pingstation-process/0.1/instance/<new instance name>/start"
+$ curl --request GET "http://$address/v1/modules/regular-streaming/pingstation-process/1.0/instance/<new instance name>/start"
 ```
 ```bash
-$ curl --request GET "http://$address/v1/modules/output-streaming/pingstation-output/0.1/instance/<new instance name>/start"
+$ curl --request GET "http://$address/v1/modules/output-streaming/pingstation-output/1.0/instance/<new instance name>/start"
 ```
 ).
 
@@ -139,15 +139,15 @@ To stop the modules:
 
 - For stopping the input module send:
 ```bash
-$ curl --request GET "http://$address/v1/modules/input-streaming/pingstation-input/0.1/instance/pingstation-input/stop"
+$ curl --request GET "http://$address/v1/modules/input-streaming/pingstation-input/1.0/instance/pingstation-input/stop"
 ```
 - For stopping the process module send:
 ```bash
-$ curl --request GET "http://$address/v1/modules/regular-streaming/pingstation-process/0.1/instance/pingstation-process/stop"
+$ curl --request GET "http://$address/v1/modules/regular-streaming/pingstation-process/1.0/instance/pingstation-process/stop"
 ```
 - For stopping the output module send:
 ```bash
-$ curl --request GET "http://$address/v1/modules/output-streaming/pingstation-output/0.1/instance/pingstation-output/start"
+$ curl --request GET "http://$address/v1/modules/output-streaming/pingstation-output/1.0/instance/pingstation-output/start"
 ```
 
 ## See the Results
