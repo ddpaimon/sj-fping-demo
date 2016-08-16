@@ -1,7 +1,7 @@
 {
   "name": "unreachable-response",
   "description": "Tstream for demo",
-  "service": "tstream_test_service",
+  "service": "tstream-ps-service",
   "tags": [
     "ping",
     "station"

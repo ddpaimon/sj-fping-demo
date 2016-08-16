@@ -1,7 +1,7 @@
 {
   "name": "echo-response-3m",
   "description": "Tstream for demo",
-  "service": "tstream_test_service",
+  "service": "tstream-ps-service",
   "tags": [
     "echo",
     "output"
