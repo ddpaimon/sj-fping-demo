@@ -2,6 +2,6 @@
   "name": "zookeeper-ps-service",
   "description": "Zookeeper service for demo",
   "provider": "zookeeper-ps-provider",
-  "namespace": "ping-station-namespace",
+  "namespace": "pingstation",
   "type": "ZKCoord"
 }
