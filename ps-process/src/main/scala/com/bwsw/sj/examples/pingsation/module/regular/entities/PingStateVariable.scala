@@ -1,4 +1,4 @@
-package com.bwsw.sj.examples.pingstation.module.regular.entities
+package com.bwsw.sj.examples.pingsation.module.regular.entities
 
 /**
  * Class is in charge of collecting statistics of fping command

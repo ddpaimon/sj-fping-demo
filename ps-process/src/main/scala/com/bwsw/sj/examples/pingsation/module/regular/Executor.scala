@@ -1,11 +1,11 @@
-package com.bwsw.sj.examples.pingstation.module.regular
+package com.bwsw.sj.examples.pingsation.module.regular
 
 import com.bwsw.common.{JsonSerializer, ObjectSerializer}
 import com.bwsw.sj.engine.core.entities._
 import com.bwsw.sj.engine.core.environment.ModuleEnvironmentManager
 import com.bwsw.sj.engine.core.regular.RegularStreamingExecutor
 import com.bwsw.sj.engine.core.state.StateStorage
-import com.bwsw.sj.examples.pingstation.module.regular.entities.PingStateVariable
+import com.bwsw.sj.examples.pingsation.module.regular.entities.PingStateVariable
 
 
 class Executor(manager: ModuleEnvironmentManager) extends RegularStreamingExecutor(manager) {

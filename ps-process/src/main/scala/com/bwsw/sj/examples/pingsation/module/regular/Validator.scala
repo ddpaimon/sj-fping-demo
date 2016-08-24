@@ -1,4 +1,4 @@
-package com.bwsw.sj.examples.pingstation.module.regular
+package com.bwsw.sj.examples.pingsation.module.regular
 
 import com.bwsw.sj.common.engine.StreamingValidator
 
