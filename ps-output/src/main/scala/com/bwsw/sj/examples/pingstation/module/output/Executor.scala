@@ -24,7 +24,7 @@ class Executor extends OutputStreamingExecutor {
    * @param envelope Input T-Stream envelope
    * @return List of output envelopes
    */
-  def onMessage(envelope: TStreamEnvelope): List[OutputEnvelope] = {
+  override def onMessage(envelope: TStreamEnvelope): List[OutputEnvelope] = {
     val list = envelope.data.map { bytes =>
       val data = new PingMetrics()
       val rawData = objectSerializer.deserialize(bytes).asInstanceOf[String].split(",")
@@ -35,7 +35,7 @@ class Executor extends OutputStreamingExecutor {
       data.totalUnreachable = rawData(4).toLong
       data.total = data.totalOk + data.totalUnreachable
 
-       println(jsonSerializer.serialize(data)) //todo for testing
+      println(jsonSerializer.serialize(data)) //todo for testing
 
       val outputEnvelope = new OutputEnvelope
       outputEnvelope.data = data
