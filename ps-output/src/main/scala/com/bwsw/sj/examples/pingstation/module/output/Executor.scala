@@ -4,7 +4,7 @@ import java.util.Date
 
 import com.bwsw.common.{JsonSerializer, ObjectSerializer}
 import com.bwsw.sj.engine.core.entities.{OutputEnvelope, TStreamEnvelope}
-import com.bwsw.sj.engine.core.output.OutputStreamingHandler
+import com.bwsw.sj.engine.core.output.OutputStreamingExecutor
 import com.bwsw.sj.examples.pingstation.module.output.data.PingMetrics
 
 /**
@@ -14,7 +14,7 @@ import com.bwsw.sj.examples.pingstation.module.output.data.PingMetrics
  *
  * @author Kseniya Mikhaleva
  */
-class Executor extends OutputStreamingHandler {
+class Executor extends OutputStreamingExecutor {
   val jsonSerializer = new JsonSerializer()
   val objectSerializer = new ObjectSerializer()
 
@@ -24,7 +24,7 @@ class Executor extends OutputStreamingHandler {
    * @param envelope Input T-Stream envelope
    * @return List of output envelopes
    */
-  def onTransaction(envelope: TStreamEnvelope): List[OutputEnvelope] = {
+  def onMessage(envelope: TStreamEnvelope): List[OutputEnvelope] = {
     val list = envelope.data.map { bytes =>
       val data = new PingMetrics()
       val rawData = objectSerializer.deserialize(bytes).asInstanceOf[String].split(",")
