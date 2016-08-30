@@ -14,6 +14,6 @@
   "per-task-ram" : 64,
   "jvm-options" : {"11" : "3e2ew"},
   "event-wait-time" : 10,
-  "coordination-service" : "zookeeper_test_service",
+  "coordination-service" : "zookeeper-ps-service",
   "performance-reporting-interval" : 10000
 }

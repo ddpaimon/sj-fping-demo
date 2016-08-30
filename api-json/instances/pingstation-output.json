@@ -11,6 +11,6 @@
   "per-task-cores" : 0.1,
   "per-task-ram" : 64,
   "jvm-options" : {"d":1},
-  "coordination-service" : "zookeeper_test_service",
+  "coordination-service" : "zookeeper-ps-service",
   "performance-reporting-interval" : 10000
 }

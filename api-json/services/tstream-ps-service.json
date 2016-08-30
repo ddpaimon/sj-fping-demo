@@ -3,9 +3,9 @@
   "description": "Tstream service for demo",
   "type": "TstrQ",
   "metadata-provider": "cassandra-ps-provider",
-  "metadata-namespace": "ping-station-keyspace",
+  "metadata-namespace": "pingstation",
   "data-provider": "cassandra-ps-provider",
-  "data-namespace": "ping-station-keyspace",
+  "data-namespace": "pingstation",
   "lock-provider": "zookeeper-ps-provider",
   "lock-namespace": "unit"
 }

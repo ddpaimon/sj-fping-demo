@@ -4,5 +4,5 @@
   "provider": "kafka-ps-provider",
   "type": "KfkQ",
   "zk-provider": "zookeeper-ps-provider",
-  "zk-namespace": "ping-station-namespace"
+  "zk-namespace": "pingstation"
 }
