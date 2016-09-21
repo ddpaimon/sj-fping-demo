@@ -153,3 +153,11 @@ $ curl --request GET "http://$address/v1/modules/output-streaming/pingstation-ou
 ## See the Results
 
 To see the results of processing containing in ElasticSearch go to the [Kibana](http://176.120.25.19/).
+
+Firstly, click the Settings tab and fill in the data entry field '*' instead of 'logstash-*'.
+Then there will appear the another data entry field called 'Time-field name', you should choose 'ts'
+from the combobox and press the create button.
+After that, click the Discover tab. Finally, you can choose a time interval called 'Last 15 minutes' in the top right corner of the page,
+as well as an auto-refresh interval of 45 seconds. Now you should see something like this:
+
+![](kibanaExample.png)
